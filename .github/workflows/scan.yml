@@ -1,4 +1,4 @@
-name: Bithumb Bison Alert Scan
+﻿name: Bithumb Bison Alert Scan
 
 on:
   schedule:
