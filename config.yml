@@ -1,0 +1,75 @@
+market: KRW
+
+scan:
+  mode: full_universe
+  top_n: 0
+  # top_n: 0 means light scan all KRW tickers from ALL_KRW.
+  deep_scan_trade_value_top_n: 80
+  deep_scan_candidate_limit: 100
+  rotate_universe_batches: true
+  rotate_batch_size: 30
+  request_sleep_seconds: 0.15
+  http_timeout_seconds: 10
+  max_runtime_seconds: 240
+  intervals:
+    fast: "5m"
+    confirm: "15m"
+    htf: "1h"
+
+liquidity:
+  min_trade_value_krw_for_buy_signal: 500000000
+  min_trade_value_krw_for_watch: 50000000
+  allow_low_liquidity_summary: true
+
+alerts:
+  max_alerts_per_run: 10
+  duplicate_suppression_hours: 6
+  notify_grades:
+    - BUY_NOW_A
+    - BUY_NOW_B
+    - BUY_NOW_C
+    - BID
+  summary_grades:
+    - CONFIRM
+    - AVOID
+  send_no_signal_heartbeat: false
+  send_full_scan_summary: true
+
+risk:
+  max_entry_risk_pct: 3.0
+  min_reward_risk: 1.5
+  position_size_hint: true
+
+portfolio:
+  enabled: false
+
+always_include:
+  - BTC
+  - XRP
+  - XLM
+  - ONDO
+  - TRAC
+  - SOON
+  - ROBO
+  - ENA
+  - IP
+  - OPG
+  - MIRA
+  - FLOCK
+  - NIL
+  - PUFFER
+  - ID
+
+manual_risk_symbols:
+  H:
+    reason: "사건성 변동성 / 브릿지보안 이슈 가능성"
+    allow_buy_signal: false
+    still_analyze: true
+  SAHARA:
+    reason: "급락 후 회복 컨펌 부족 / 변동성 과다"
+    allow_buy_signal: false
+    still_analyze: true
+  WLD:
+    reason: "거래대금 과열 가능성 / 고점 추격 주의"
+    allow_buy_signal: true
+    still_analyze: true

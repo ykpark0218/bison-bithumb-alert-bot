@@ -1,0 +1,16 @@
+holdings:
+  - symbol: XLM
+    avg_price: 281.8
+    quantity: 0
+  - symbol: TRAC
+    avg_price: 550
+    quantity: 0
+  - symbol: ROBO
+    avg_price: 29.67
+    quantity: 0
+  - symbol: ENA
+    avg_price: 141
+    quantity: 0
+  - symbol: SOON
+    avg_price: 250
+    quantity: 0

@@ -1,0 +1,18 @@
+market: KRW
+scan:
+  deep_scan_trade_value_top_n: 2
+  deep_scan_candidate_limit: 3
+  rotate_universe_batches: false
+  intervals:
+    fast: "5m"
+    confirm: "15m"
+    htf: "1h"
+liquidity:
+  min_trade_value_krw_for_buy_signal: 100000000
+  min_trade_value_krw_for_watch: 10000000
+alerts:
+  send_full_scan_summary: true
+portfolio:
+  enabled: false
+always_include: []
+manual_risk_symbols: {}
