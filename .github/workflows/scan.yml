@@ -1,4 +1,4 @@
-﻿name: Bithumb Bison Alert Scan
+name: Bithumb Bison Alert Scan
 
 on:
   schedule:
@@ -32,7 +32,7 @@ jobs:
           python -m pip install -e ".[dev]"
 
       - name: Run tests
-        run: pytest
+        run: python -m pytest -q
 
       - name: Run scan
         env:
