@@ -5,9 +5,10 @@ from collections import Counter
 from pathlib import Path
 
 import pandas as pd
+import requests
 
 from bison_bot.bison_playbook import analyze_symbol, build_btc_context
-from bison_bot.bithumb import BithumbClient
+from bison_bot.bithumb import BithumbClient, BithumbPublicApiError
 from bison_bot.models import AppConfig, BtcContext, LightScanResult, PortfolioData, Signal
 from bison_bot.portfolio import load_portfolio
 from bison_bot.state import AlertState
@@ -47,8 +48,15 @@ class Scanner:
     def run_once(self) -> list[Signal]:
         self.started_at = time.monotonic()
         portfolio = load_portfolio(self.config, self.root)
-        light_results = self.client.get_all_krw_tickers()
+        try:
+            light_results = self.client.get_all_krw_tickers()
+        except (BithumbPublicApiError, requests.RequestException, OSError) as exc:
+            self.logger.error("Bithumb light scan failed; ending this run without alerts: %s", exc)
+            return []
         light_results = self._limit_light_results(light_results)
+        if not light_results:
+            self.logger.warning("No light scan results; ending this run without alerts")
+            return []
         light_by_symbol = {result.symbol: result for result in light_results}
         deep_symbols = self.select_deep_scan_symbols(light_results, portfolio)
         if self.max_deep_symbols is not None and self.max_deep_symbols > 0:

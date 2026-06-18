@@ -86,6 +86,8 @@ class AppConfig(BaseModel):
 
 class LightScanResult(BaseModel):
     symbol: str
+    market: str = ""
+    base_symbol: str = ""
     current_price: float
     high_24h: float
     low_24h: float
